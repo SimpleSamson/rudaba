@@ -1,5 +1,6 @@
 use std::fs::{DirBuilder, File};
-
+use crate::rudabaDB::{Data, Database, User};
+use delete::{delete_file};
 fn main() {
     println!("Welcome {username}");
 }
@@ -9,33 +10,65 @@ fn main() {
         - database_name: the name of the database to be created and accessed
         - username: the name of the user
  */
-struct Database{
-    database_name: String,
-    host_name: String,
-    user_name: String,
+pub mod rudabaDB {
+    pub struct Database {
+        pub(crate) database_name: String,
+        host_name: String,
+        user_name: String,
+        pub(crate) database_directory: String //create a default database location when user does not add their own
+    }
+    //struct for storing user data
+    //
+    //user_id stores the unique user identifier in String form
+    //username stores the user name as a String
+    //password stores the password of a user as a string, NOTE: TODO: change this to an encrypted value
+    //example:     rudabaDB::User{user_id: "12648465".parse().unwrap(), user_name: "example".parse().unwrap(), password: "54fchx654gh".parse().unwrap() }
+    pub(crate) struct User {
+        pub(crate) user_id: String,
+        //can be combination of letters and integers but preferably integer
+        pub(crate) user_name: String,
+        pub(crate) password: String   //should be able to hold encrypted data
+    }
 
-}
-struct User{
-    user_id: String, //can be combination of letters and integers but preferably integer
-    user_name: String,
-    password: String   //should be able to hold encrypted data
-}
-
-//tables
-struct Table{
-    table_name: String,
+    /* //tables better to use data since this is a no sql
+    struct Table{
+        table_name: String,
+        column_name: String,
+        column_number: i128,
+    } */
+    //Data: used to store information in files
+    pub struct Data{
+        pub(crate) data_id: String, //this should be unique to enable the data to be located when a search isd performed
+        pub(crate) data_title: String,
+        pub(crate) data: String
+    }
 }
 //create a new databse
 fn create_database(database: Database, user: User){
     //save user details to a config file
-    let databasePath = database.database_name;
+    let database_path = database.database_directory + &*database.database_name;
     DirBuilder::new()
-        .create(databasePath).unwrap(); //we do not use .recursive to avoid overwriting the database if it exists
-
+        .create(database_path).unwrap(); //we do not use .recursive to avoid overwriting the database if it exists
 }
-fn create_table(table: Table){
+
+/*fn create_table(table: Table){
     //ALL DATABASE FILES ARE IN json format
     let mut new_table_name = table.table_name + ".json";
     let mut file = File::create(new_table_name);
+}
+*/
+//add data to a Database object
+//example
+fn add_data(data: Data){
+    let mut new_data_title = data.data_title + ".json";
+    let mut file = File::create(new_data_title);
+}
 
+fn edit_data(data: Data){
+    add_data(Data{data_id: "0123".parse().unwrap(), data_title: "Tools".parse().unwrap(), data: "scraper".parse().unwrap() })
+}
+fn delete_data(data: Data){
+    let mut to_be_deleted_data_title = data.data_title + ".json";
+    //delete file
+    delete:
 }
