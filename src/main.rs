@@ -1,6 +1,6 @@
 use std::fs::{DirBuilder, File};
 use crate::rudabaDB::{Data, Database, User};
-use delete::{delete_file};
+use delete::{delete_file_async};
 fn main() {
     println!("Welcome {username}");
 }
@@ -67,8 +67,9 @@ fn add_data(data: Data){
 fn edit_data(data: Data){
     add_data(Data{data_id: "0123".parse().unwrap(), data_title: "Tools".parse().unwrap(), data: "scraper".parse().unwrap() })
 }
-fn delete_data(data: Data){
+//dataID is the
+async fn delete_data(data: Data){
     let mut to_be_deleted_data_title = data.data_title + ".json";
-    //delete file
-    delete:
+    //delete file asynchronously
+    delete_file_async(&*to_be_deleted_data_title).await.unwrap();
 }
