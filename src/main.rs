@@ -1,10 +1,10 @@
 use std::fs::{DirBuilder, File};
 use crate::rudabaDB::{Data, Database, User};
 use delete::{delete_file_async};
+use compare::{Compare,Extract};
 
 fn main() {
-    let currentUsername = User{};// get from db login
-    println!("Welcome {0}", currentUsername.user_name);
+
 }
 
 /*
@@ -76,19 +76,30 @@ async fn delete_data(data: Data){
     delete_file_async(&*to_be_deleted_data_title).await.unwrap();
 }
 //read data from database using its title
-async fn read_data(data_title: Data::data_title){
+async fn read_data(data_title: String){
+    let mut to_be_read:String = Data::from(data_title);    
 
 }
 fn update_data(data: Data){
     let mut to_be_edited_data_title: String = data.data_title + ".json";
 
 }
+//compare a data tuple element with another
 fn compare_data(dataToCompare: Data, referenceData: Data) {
     let comparison_found:bool=false;
         match dataToCompare{
-            referenceData => comparison_found=true;
+//            referenceData => {comparison_found == true};
+            referenceData=> {
+                comparison_found = true;
+            }
         }
-}
-fn login_to_database(username: User::user_name, password: User::password){
-
+    }
+//User x=new User;
+fn login_to_database(username: str, password: str){
+//    let currentUsername = User{'{}', read_data("currentUser")};// get from db login
+//    println!("Welcome '{}'", currentUsername.user_name);
+//    compare to database file
+    let attemptingUser: User = {user_name: username, password: password} ;
+    compare_data(attemptingUser, read_data("username"))
+    println!("Welcome '{}'", read_data("username"));
 }
