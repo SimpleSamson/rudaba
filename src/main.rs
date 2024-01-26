@@ -103,3 +103,7 @@ fn login_to_database(username: str, password: str){
     compare_data(attemptingUser, read_data("username"))
     println!("Welcome '{}'", read_data("username"));
 }
+trait readable{
+    fn read_data($self) -> Data;
+    fn login_to_database()
+}
