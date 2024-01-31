@@ -105,5 +105,12 @@ fn login_to_database(username: str, password: str){
 }
 trait readable{
     fn read_data($self) -> Data;
-    fn login_to_database()
+    fn login_to_database(&mut self, username: &str, password: &str);
+
+}
+trait editable{
+    pub fn edit_data($mut self, edited_data_title: str, edited_data : str){
+        self.data_title = edited_data_title;
+        self.data = edited_data;
+    }
 }
