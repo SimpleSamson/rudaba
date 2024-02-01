@@ -113,4 +113,7 @@ trait editable{
         self.data_title = edited_data_title;
         self.data = edited_data;
     }
+    pub fn delete_data($mut self, data_to_be_deleted){
+        self.data_title = data_to_be_deleted;
+    }
 }
