@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 delete = "1.0.1"
+compare = "0.1.0"
+savefile = "0.16.5"
