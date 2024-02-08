@@ -2,7 +2,7 @@ use std::fs::{DirBuilder, File};
 use crate::rudabaDB::{Data, Database, User};
 use delete::{delete_file_async};
 use compare::{Compare,Extract};
-
+use savefile
 fn main() {
 
 }
@@ -46,12 +46,15 @@ pub mod rudabaDB {
     }
 }
 //create a new databse
-fn create_database(database: Database, user: User){
-    //save user details to a config file
-    let database_path = database.database_directory + &*database.database_name;
-    DirBuilder::new()
-        .create(database_path).unwrap(); //we do not use .recursive to avoid overwriting the database if it exists
+impl Database {
+    fn create_database(database: Database, user: User){
+        //save user details to a config file
+        let database_path = database.database_directory + &*database.database_name;
+        DirBuilder::new()
+            .create(database_path).unwrap(); //we do not use .recursive to avoid overwriting the database if it exists
+    }
 }
+
 
 /*fn create_table(table: Table){
     //ALL DATABASE FILES ARE IN json format
@@ -87,13 +90,13 @@ fn update_data(data: Data){
 //compare a data tuple element with another
 fn compare_data(dataToCompare: Data, referenceData: Data) {
     let comparison_found:bool=false;
-        match dataToCompare{
+    match dataToCompare{
 //            referenceData => {comparison_found == true};
-            referenceData=> {
-                comparison_found = true;
-            }
+        referenceData=> {
+            comparison_found = true;
         }
     }
+}
 //User x=new User;
 fn login_to_database(username: str, password: str){
 //    let currentUsername = User{'{}', read_data("currentUser")};// get from db login
@@ -113,7 +116,13 @@ trait editable{
         self.data_title = edited_data_title;
         self.data = edited_data;
     }
-    pub fn delete_data($mut self, data_to_be_deleted){
+    ///data source should be data title
+    pub fn delete_data($mut self, data_to_be_deleted, data_source){
         self.data_title = data_to_be_deleted;
+        data_source = data_source.replace(data_to_be_deleted, "");
     }
+
+}
+impl Database{
+    fn
 }
