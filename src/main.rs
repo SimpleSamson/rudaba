@@ -80,7 +80,8 @@ async fn delete_data(data: Data){
 }
 //read data from database using its title
 async fn read_data(data_title: String){
-    let mut to_be_read:String = Data::from(data_title);    
+//    let mut to_be_read:String = Data::from(data_title);    
+    let mut to_be_read = Data::from(data_title);    
 
 }
 fn update_data(data: Data){
