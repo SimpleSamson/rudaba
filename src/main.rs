@@ -1,6 +1,9 @@
 use std::fs::{DirBuilder, File};
 use crate::rudabaDB::{Data, Database, User};
 use delete::{delete_file_async};
+use std::path::Path;
+use std::io::{self, BufRead};
+use std::path::Path;
 use compare::{Compare,Extract};
 use savefile
 fn main() {
@@ -79,10 +82,25 @@ async fn delete_data(data: Data){
     delete_file_async(&*to_be_deleted_data_title).await.unwrap();
 }
 //read data from database using its title
-async fn read_data(data_title: String){
+async fn read_data(selected_data_title: String){
+    if let Ok(lines) = read_lines("{}.rdb", data_title){
+        //consumes iterator,returns a string(optional)
+        for line in lines.flatten(){
+            println!("{}", line);
+        }
+    }
 //    let mut to_be_read:String = Data::from(data_title);    
-    let mut to_be_read = Data::from(data_title);    
-
+    let mut to_be_read = Data::from(
+        Data{
+            data_id: (_),
+            data_title: data_title,
+            data: (_),
+        });    
+}
+fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
+where P: AsRef<Path>,{
+    let file = File::open(filename)?;
+    Ok(io::BufReader::new(file).lines())
 }
 fn update_data(data: Data){
     let mut to_be_edited_data_title: String = data.data_title + ".json";
@@ -90,7 +108,7 @@ fn update_data(data: Data){
 }
 //compare a data tuple element with another
 fn compare_data(dataToCompare: Data, referenceData: Data) {
-    let comparison_found:bool=false;
+    let mut comparison_found:bool=false;
     match dataToCompare{
 //            referenceData => {comparison_found == true};
         referenceData=> {
