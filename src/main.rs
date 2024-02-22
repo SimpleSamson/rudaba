@@ -5,7 +5,7 @@ use std::path::Path;
 use std::io::{self, BufRead};
 use std::path::Path;
 use compare::{Compare,Extract};
-use savefile
+use savefile;
 fn main() {
 
 }
@@ -121,8 +121,8 @@ fn login_to_database(username: str, password: str){
 //    let currentUsername = User{'{}', read_data("currentUser")};// get from db login
 //    println!("Welcome '{}'", currentUsername.user_name);
 //    compare to database file
-    let attemptingUser: User = {user_name: username, password: password} ;
-    compare_data(attemptingUser, read_data("username"))
+    let attemptingUser: User = User { user_id: (_), user_name: (username), password: (password) };//{user_name: username, password: password} ;
+    compare_data(attemptingUser, read_data("username"));
     println!("Welcome '{}'", read_data("username"));
 }
 trait readable{
