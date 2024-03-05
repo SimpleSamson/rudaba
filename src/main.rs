@@ -3,7 +3,6 @@ use crate::rudabaDB::{Data, Database, User};
 use delete::{delete_file_async};
 use std::path::Path;
 use std::io::{self, BufRead};
-use std::path::Path;
 use compare::{Compare,Extract};
 use savefile;
 fn main() {
@@ -83,7 +82,7 @@ async fn delete_data(data: Data){
 }
 //read data from database using its title
 async fn read_data(selected_data_title: String){
-    if let Ok(lines) = read_lines("{}.rdb", data_title){
+    if let Ok(lines) = read_lines(selected_data_title + ".rdb"){
         //consumes iterator,returns a string(optional)
         for line in lines.flatten(){
             println!("{}", line);
@@ -93,7 +92,7 @@ async fn read_data(selected_data_title: String){
     let mut to_be_read = Data::from(
         Data{
             data_id: (_),
-            data_title: data_title,
+            data_title: selected_data_title,
             data: (_),
         });    
 }
@@ -131,17 +130,17 @@ trait readable{
 
 }
 trait editable{
-    pub fn edit_data(&mut self, edited_data_title: str, edited_data : str){
+    fn edit_data(&mut self, edited_data_title: str, edited_data : str){
         self.data_title = edited_data_title;
         self.data = edited_data;
     }
     ///data source should be data title
-    pub fn delete_data($mut self, data_to_be_deleted, data_source){
+    fn delete_data(&mut self, data_to_be_deleted: Data, data_source:Data){
         self.data_title = data_to_be_deleted;
         data_source = data_source.replace(data_to_be_deleted, "");
     }
-
 }
-impl Database{
+/* impl Database{
     fn
 }
+*/
