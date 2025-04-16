@@ -1,0 +1,12 @@
+[package]
+name = "rudaba"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+delete = "1.0.1"
+compare = "0.1.0"
+savefile = "0.16.5"
+async-std = "1.13.0"
