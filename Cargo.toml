@@ -2,8 +2,18 @@
 name = "rudaba"
 version = "0.1.0"
 edition = "2021"
-
+license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package.metadata]
+default-target = "x86_64-samosa-linux-gnu"
+
+# Targets to build
+#
+#
+#
+#
+targets = ["x86_64-unknown-linux-gnu", ]
 
 [dependencies]
 delete = "1.0.1"

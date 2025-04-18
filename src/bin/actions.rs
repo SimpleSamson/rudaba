@@ -114,8 +114,8 @@ impl Motor {
 
         let mut MotorID = databaseFx::read_data_values("motors".to_string());
         //from the returned data get the motor ID
-        
-        return &MotorID;
+        fn errorRet(xy: str) ->() { "error";}
+        return &MotorID.unwrap_or_else(errorRet);
     }
 }
 /*struct Motor{
